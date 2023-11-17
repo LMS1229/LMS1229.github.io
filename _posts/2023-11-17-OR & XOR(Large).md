@@ -25,7 +25,7 @@ $count(A,x)$ 는 어떻게 구할 수 있을까?
 ### $count(A,x)$
 
 $A_{cnt,y}[i] = A$ 에 존재하는 원소 $i$ 에 대하여 $(i \lor \sum_{k=0}^{y-1}(1 \ll k)) \And i = i$ 의 개수 하자. 
-배열 $A$ 에 존재하는 $i$ 의 개수는 $A_{cnt,0}[i]$ 개 되며
+배열 $A$ 에 존재하는 $i$ 의 개수는 $A_{cnt,0}[i]$ 가 되며
 
 $i \And (2^{y-1}) = i$ 라면 $A_{cnt,y}[i] = A_{cnt,y-1}[i]$ 이고\
 $i \And (2^{y-1}) = 0$ 라면 $A_{cnt,y}[i] = A_{cnt,y-1}[i] + A_{cnt,y-1}[i \lor 2^{y-1}]$ 가 된다.
@@ -49,3 +49,11 @@ $x \And (2^{y}) = 0$ 라면 $Result_{cnt,y+1}[x] = Result_{cnt,y}[x] - Result_{c
 이를 이용해 모든 $0 \le x \lt 2^{u=17}$ 에 대하여 $Result_{cnt,17}$ 를 구한 후, $x$ 가 큰 순서대로 $p$ 개의 결과를 더하면 된다.
 
 각 과정은 모두 배열에 (존재할 수 있는 최댓값)$\lt 2^u$ 에 $0 \sim 2^u-1$ 까지 모든 수에 대하여 $u$ 개의 비트만큼 반복하므로 $O(u2^u)$ 의 시간 복잡도를 가진다.
+
+그리고 $\sum_{i=1}^{N} \sum_{j=1}^{N} {A_i \oplus B_j}$ 는 각 비트별로 개수를 세어 비트단위로 다음과 같이 계산한다.
+$$
+\sum_{i=0}^{16}((1 \ll i)((N-bitCount(A,i))bitCount(B,i)+bitCount(A,i)(N-bitCount(B,i))))
+$$
+$$
+bitCount(A,i)=n(\{A_x | A_x \in A, A_x \And (1 \ll i) = 1 \ll i\})
+$$
