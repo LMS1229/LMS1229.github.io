@@ -1,5 +1,5 @@
 ---
-title: "[BOJ] OR & XOR(Large)"
+title: "[BOJ] OR And XOR(Large)"
 author:
 name: 이민석
 date: 2023-11-17 19:28:00 +0900
@@ -9,26 +9,26 @@ math: true
 ---
 
 
-[BOJ OR & XOR(Large)](https://www.acmicpc.net/problem/30523)
+[BOJ OR And XOR(Large)](https://www.acmicpc.net/problem/30523)
 
 ## 풀이
 
-먼저, $\oplus$ 연산을 $|$ 연산으로 바꾸게 되면 $x|y = x\oplus y + x \& y$ 가 된다. 따라서 $N^2$ 개의 $A_i \& B_j (1 \le i,j \le n)$ 연산 중, 가장 큰 $p$ 개를 고르면 된다.
+먼저, $\oplus$ 연산을 $\or $ 연산으로 바꾸게 되면 $x\or y = x\oplus y + x \And y$ 가 된다. 따라서 $N^2$ 개의 $A_i \And B_j (1 \le i,j \le n)$ 연산 중, 가장 큰 $p$ 개를 고르면 된다.
 
 
-$A$ 에 존재하는 수 $A_i$  중, $A_i \& x = x$ 의 개수를 $count(A,x)$, B에 존재하는 수 $B_i$ 중,  $B_i\& x = x$ 의 개수를 $count(B,x)$ 라 하자.
+$A$ 에 존재하는 수 $A_i$  중, $A_i \And x = x$ 의 개수를 $count(A,x)$, B에 존재하는 수 $B_i$ 중,  $B_i\And x = x$ 의 개수를 $count(B,x)$ 라 하자.
 
-그렇다면 $A_i \& B_j = Result_{i,j} (1 \le i,j \le n) $ 에 대하여 $Result_{i,j} \& x = x$ 를 만족하는 $(i,j)$ 의 경우의 수$count(Result,x) = count(A,x)\times count(B,x)$ 가 된다. 
+그렇다면 $A_i \And B_j = Result_{i,j} (1 \le i,j \le n) $ 에 대하여 $Result_{i,j} \And x = x$ 를 만족하는 $(i,j)$ 의 경우의 수$count(Result,x) = count(A,x)\times count(B,x)$ 가 된다. 
 
 $count(A,x)$ 는 어떻게 구할 수 있을까?
 
 ### $count(A,x)$
 
-$A_{cnt,y}[i] = A$ 에 존재하는 원소 $i$ 에 대하여 $(i|\sum_{k=0}^{y-1}(1<<k))\& i = i$ 의 개수 하자. 
+$A_{cnt,y}[i] = A$ 에 존재하는 원소 $i$ 에 대하여 $(i\or \sum_{k=0}^{y-1}(1<<k))\And i = i$ 의 개수 하자. 
 배열 $A$ 에 존재하는 $i$ 의 개수는 $A_{cnt,0}[i]$ 개 되며
 
-$i\& (2^{y-1}) = i$ 라면 $A_{cnt,y}[i] = A_{cnt,y-1}[i]$ 이고\
-$i\& (2^{y-1}) = 0$ 라면 $A_{cnt,y}[i] = A_{cnt,y-1}[i] + A_{cnt,y-1}[i|2^{y-1}]$ 가 된다.
+$i\And (2^{y-1}) = i$ 라면 $A_{cnt,y}[i] = A_{cnt,y-1}[i]$ 이고\
+$i\And (2^{y-1}) = 0$ 라면 $A_{cnt,y}[i] = A_{cnt,y-1}[i] + A_{cnt,y-1}[i\or 2^{y-1}]$ 가 된다.
 
 따라서 $count(A,x)=A_{cnt,y=17}[x]$ 가 된다.
 
@@ -37,12 +37,12 @@ $i\& (2^{y-1}) = 0$ 라면 $A_{cnt,y}[i] = A_{cnt,y-1}[i] + A_{cnt,y-1}[i|2^{y-1
 
 그러나 우리는 최종적으로 $Result_{i,j}=x$ 가 되는 경우를 구해야 한다. 이는 위의 $count(A,x)$ 를 구하는 과정과 유사하다. 
 
-$Result_{cnt,y}[x] = x|\sum_{k=y}^{16}(1<<k)\& x= Result_{i,j}$ 를 만족하는 $(i,j)$ 의 개수 라 하자. 
+$Result_{cnt,y}[x] = x\or \sum_{k=y}^{16}(1<<k)\And x= Result_{i,j}$ 를 만족하는 $(i,j)$ 의 개수 라 하자. 
 
 $count(Result,x)=Result_{cnt,0}[x]$ 이다.
 
-$i\& (2^{y}) = i$ 라면 $Result_{cnt,y+1}[x] = Result_{cnt,y}[x]$ 이고\
-$i\& (2^{y}) = 0$ 라면 $Result_{cnt,y+1}[x] = Result_{cnt,y}[x] - Result_{cnt,y}[x|2^{y}]$ 가 된다.
+$i\And (2^{y}) = i$ 라면 $Result_{cnt,y+1}[x] = Result_{cnt,y}[x]$ 이고\
+$i\And (2^{y}) = 0$ 라면 $Result_{cnt,y+1}[x] = Result_{cnt,y}[x] - Result_{cnt,y}[x\or 2^{y}]$ 가 된다.
 
 따라서 최종적으로 $Result_{i,j}=x$ 인 $(i,j)$ 의 개수는 $Result_{cnt,17}[x]$ 가 된다.
 

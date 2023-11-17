@@ -2,7 +2,7 @@
 title: "[BOJ] Slot Machines"
 author:
 name: 이민석
-date: 2023-11-14 20:17:00 +0900
+date: 2023-11-14 19:17:00 +0900
 categories: ["PS"]
 tags: ["KMP"]
 math: true
