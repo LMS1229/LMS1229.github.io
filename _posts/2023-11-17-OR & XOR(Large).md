@@ -2,7 +2,7 @@
 title: "[BOJ] OR & XOR(Large)"
 author:
 name: 이민석
-date: 2023-11-14 20:28:00 +0900
+date: 2023-11-17 19:28:00 +0900
 categories: ["PS"]
 tags: ["다이나믹 프로그래밍","비트마스크"]
 math: true
