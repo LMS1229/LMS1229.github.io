@@ -102,5 +102,10 @@
         "section": "Improvements"
       }
     ]
+  },
+  "dependencies": {
+    "build": "^0.1.4",
+    "npm": "^10.2.4",
+    "run": "^1.4.0"
   }
 }
