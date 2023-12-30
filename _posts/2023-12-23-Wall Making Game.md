@@ -3,7 +3,7 @@ title: Wall Making Game
 layout: post
 author:
 name: 이민석
-date: 2023-12-24 23:00:00 +0900
+date: 2023-12-23 23:00:00 +0900
 categories: ["PS"]
 tag : ["게임이론", "스프라그-그런디 정리"]
 math: true
